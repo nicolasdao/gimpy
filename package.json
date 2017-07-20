@@ -1,0 +1,23 @@
+{
+  "name": "gimpy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version --prerelease alpha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasdao/gimpy.git"
+  },
+  "author": "Nicolas Dao",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/nicolasdao/gimpy/issues"
+  },
+  "homepage": "https://github.com/nicolasdao/gimpy#readme",
+  "devDependencies": {
+    "standard-version": "^4.2.0"
+  }
+}
