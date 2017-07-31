@@ -1,0 +1,18 @@
+{
+  "name": "{{projectName}}",
+  "version": "{{projectVersion}}",
+  "scripts": {
+    "postinstall": "npm dedupe",
+    "test": "mocha",
+    "deploy": "gimp deploy",
+    "logs": "gimp logs"
+  },
+  "dependencies": {
+    "webfunc": "^0.1.0-alpha.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2",
+    "gimpy": "^0.0.1"
+  }
+}

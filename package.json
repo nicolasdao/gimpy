@@ -1,16 +1,30 @@
 {
   "name": "gimpy",
   "version": "0.1.0-alpha.0",
-  "description": "",
+  "description": "I'm your gimp! I loves doing your painful chores like your project initilization, your deployments. The more painful it is, that more I will like it.",
+  "contributors": [
+    "Nicolas Dao <nic@neap.co> (https://neap.co/)"
+  ],
+  "bin": {
+    "gimp": "./index.js"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "standard-version --prerelease alpha"
+    "release": "standard-version --prerelease alpha",
+    "eslint": "eslint index.js src/ templates/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nicolasdao/gimpy.git"
   },
+  "keywords": [
+    "gimp",
+    "templates",
+    "task",
+    "google-cloud-functions",
+    "google-cloud"
+  ],
   "author": "Nicolas Dao",
   "license": "BSD-3-Clause",
   "bugs": {
@@ -18,6 +32,15 @@
   },
   "homepage": "https://github.com/nicolasdao/gimpy#readme",
   "devDependencies": {
+    "eslint": "^4.3.0",
     "standard-version": "^4.2.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.11.0",
+    "lodash": "^4.17.4",
+    "ncp": "^2.0.0",
+    "replace": "^0.3.0",
+    "shelljs": "^0.7.8"
   }
 }
