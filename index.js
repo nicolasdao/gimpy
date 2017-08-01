@@ -12,7 +12,7 @@ const program = require('commander')
 /*eslint-disable */
 const colors = require('colors')
 /*eslint-enable */
-const { askProjectQuestions } = require('./src/questions')
+const { askProjectQuestionsToGetAnswers } = require('./src/questions')
 const { createApp } = require('./src/projectInit')
 const { deploy } = require('./src/deploy')
 const { logs } = require('./src/logs')
@@ -21,7 +21,7 @@ program
 	.version('1.0.0')
 	.command('init [dest]')
 	.usage('Creates a new project for my master.')
-	.action(dest => askProjectQuestions(dest).then(options => createApp(options)))
+	.action(dest => askProjectQuestionsToGetAnswers({ dest }).then(answers => createApp(answers)))
 
 program
 	.command('deploy [env]')

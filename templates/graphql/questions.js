@@ -54,8 +54,8 @@ exports.preQuestions = () => {
 
 exports.questions = [{
 	question: answers => `project name: ${answers.dest ? `(${sanitizeDest(answers.dest)}) ` : ''} `.cyan,
-	answer: 'projectName',
-	default: answers => answers.dest,
+	answerName: 'projectName',
+	defaultValue: answers => answers.dest,
 	execute: {
 		validate: null,
 		onSuccess: answer => sanitizeProjectName(answer)
@@ -63,13 +63,13 @@ exports.questions = [{
 	files: ['package.json']
 },{
 	question: answers => `project version: (1.0.0) `.cyan,
-	answer: 'projectVersion',
-	default: answers => `1.0.0`,
+	answerName: 'projectVersion',
+	defaultValue: answers => `1.0.0`,
 	files: ['package.json']
 },{
 	question: answers => `Google Cloud Function name : (${sanitizeFunctionName(answers.projectName)}) `.cyan,
-	answer: 'functionName',
-	default: answers => answers.projectName,
+	answerName: 'functionName',
+	defaultValue: answers => answers.projectName,
 	execute: {
 		onSuccess: answer => sanitizeFunctionName(answer)
 	},
@@ -80,8 +80,8 @@ exports.questions = [{
 						 '  [2] Pub/Sub \n' +
 						 '  [3] Storage \n' +
 						 'Choose one of the above: ([1]) ').cyan,
-	answer: 'trigger',
-	default: answers => 1,
+	answerName: 'trigger',
+	defaultValue: answers => 1,
 	execute: {
 		validate: answer => TRIGGERS[answer],
 		onSuccess: answer => TRIGGERS[answer],
@@ -90,24 +90,24 @@ exports.questions = [{
 	files: ['webconfig.json']
 },{
 	question: answers => `Google Cloud Function entry-point (no spaces, no hyphens): (${sanitizeEntryPoint(answers.projectName)}) `.cyan,
-	answer: 'entryPoint',
-	default: answers => answers.projectName,
+	answerName: 'entryPoint',
+	defaultValue: answers => answers.projectName,
 	execute: {
 		onSuccess: answer => sanitizeEntryPoint(answer)
 	},
 	files: ['index.js', 'webconfig.json']
 },{
 	question: answers => `Google Cloud Project: (${answers.projectName.toLowerCase()}) `.cyan,
-	answer: 'googleProject',
-	default: answers => answers.projectName,
+	answerName: 'googleProject',
+	defaultValue: answers => answers.projectName,
 	execute: {
 		onSuccess: answer => answer.toLowerCase()
 	},
 	files: ['webconfig.json']
 },{
 	question: answers => `Google Cloud Function bucket: (${sanitizeBucket(answers.projectName)}) `.cyan,
-	answer: 'bucket',
-	default: answers => answers.projectName,
+	answerName: 'bucket',
+	defaultValue: answers => answers.projectName,
 	execute: {
 		onSuccess: answer => sanitizeBucket(answer)
 	},

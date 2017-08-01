@@ -1,0 +1,8 @@
+{
+	"name": "graphql-google-functions",
+	"version": "0.0.1",
+	"description": "GraphQL project for Google Cloud Functions built using google-graphql-functions package, schemaglue, and graphql-s2s.",
+	"host": "google-cloud-functions",
+	"author": "Nicolas Dao",
+	"license": "BSD-3-Clause"
+}
