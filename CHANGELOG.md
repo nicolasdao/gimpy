@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.3"></a>
+# [0.1.0-alpha.3](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2017-08-02)
+
+
+### Bug Fixes
+
+* deploy.js to support appconfig ([c503a31](https://github.com/nicolasdao/gimpy/commit/c503a31))
+
+
+
 <a name="0.1.0-alpha.2"></a>
 # [0.1.0-alpha.2](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2017-08-02)
 
