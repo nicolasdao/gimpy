@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.2"></a>
+# [0.1.0-alpha.2](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2017-08-02)
+
+
+### Bug Fixes
+
+* Find a hack to force putting the 'templates' folder under source control ([3464a3c](https://github.com/nicolasdao/gimpy/commit/3464a3c))
+
+
+### Features
+
+* Add verbose mode for debugging purpose ([29b3421](https://github.com/nicolasdao/gimpy/commit/29b3421))
+
+
+
 <a name="0.1.0-alpha.1"></a>
 # [0.1.0-alpha.1](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.0...v0.1.0-alpha.1) (2017-08-02)
 
