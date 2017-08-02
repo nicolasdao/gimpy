@@ -1,0 +1,1 @@
+This _templates_ folder will contain all the gimpy-templates that are cloned from GitHub. This is the cache.
