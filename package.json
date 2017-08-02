@@ -36,11 +36,13 @@
     "standard-version": "^4.2.0"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "colors": "^1.1.2",
     "commander": "^2.11.0",
     "lodash": "^4.17.4",
     "ncp": "^2.0.0",
     "replace": "^0.3.0",
+    "rimraf": "^2.6.1",
     "shelljs": "^0.7.8"
   }
 }

@@ -16,7 +16,7 @@ const copyFolderContent = u.copyFolderContent
 
 const createApp = answers => {
 	/*eslint-disable */
-	const destination = answers.dest ? path.join(process.cwd(), answers.dest) : process.cwd()
+	const destination = answers._dest ? path.join(process.cwd(), answers._dest) : process.cwd()
 	/*eslint-enable */
 	createDir(destination)
 	copyFolderContent(answers._templatePath, destination)
@@ -26,7 +26,7 @@ const createApp = answers => {
 				for (let key in answers) {
 					const answer = answers[key]
 					if (answer.type == 'answer' && (answer.files || []).length > 0) {
-						const token = answer.token
+						const token = `{{${answer.token}}}`
 						const tokenValue = answer.value 
 						replace({
 							regex: token,
@@ -38,7 +38,7 @@ const createApp = answers => {
 					}
 				}
 
-				console.log(`New Google Cloud Function project '${projectName.italic.bold}' successfully created.`.green)
+				console.log(`New ${answers._projectType} project successfully created.`.green)
 				/*eslint-disable */
 				process.exit(1)
 				/*eslint-enable */

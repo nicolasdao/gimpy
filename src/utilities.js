@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
 */
 const fs = require('fs')
+const rimraf = require('rimraf')
 const readline = require('readline')
 const ncp = require('ncp').ncp
 ncp.limit = 16 // nbr of concurrent process allocated to copy your files
@@ -26,11 +27,15 @@ const askQuestion = (question) => {
 		})
 }
 
-const createDir = (dirname) => {
-	if (!fs.existsSync(dirname)) {
-		fs.mkdirSync(dirname)
+const createDir = (dir) => {
+	if (!dirExists(dir)) {
+		fs.mkdirSync(dir)
 	}
 }
+
+const dirExists = dir => fs.existsSync(dir)
+
+const listDirectories = p => fs.readdirSync(p).filter(f => fs.statSync(p+'/'+f).isDirectory())
 
 const copyFolderContent = (src, dest) => {
 	/*eslint-disable */
@@ -38,8 +43,14 @@ const copyFolderContent = (src, dest) => {
 	/*eslint-enable */
 }
 
+const deleteDir = dir => new Promise(onSuccess => rimraf(dir, () => onSuccess()))
+
+
 module.exports = {
-	askQuestion: askQuestion,
-	copyFolderContent: copyFolderContent,
-	createDir: createDir
+	askQuestion,
+	copyFolderContent,
+	createDir,
+	dirExists,
+	listDirectories,
+	deleteDir
 }

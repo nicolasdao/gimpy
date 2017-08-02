@@ -12,16 +12,35 @@ const program = require('commander')
 /*eslint-disable */
 const colors = require('colors')
 /*eslint-enable */
-const { askProjectQuestionsToGetAnswers } = require('./src/questions')
+const { loadProjectType } = require('./src/questions')
 const { createApp } = require('./src/projectInit')
 const { deploy } = require('./src/deploy')
 const { logs } = require('./src/logs')
+const { list } = require('./src/search')
+const { clearCache } = require('./src/cache')
 
 program
 	.version('1.0.0')
-	.command('init [dest]')
+	.command('new <projectType> [dest]')
 	.usage('Creates a new project for my master.')
-	.action(dest => askProjectQuestionsToGetAnswers({ dest }).then(answers => createApp(answers)))
+	.action((projectType, dest) => loadProjectType({ projectType, dest }).then(answers => createApp(answers)))
+
+program
+	.command('list')
+	.usage('List all templates hosted on github')
+	.option('-c, --cache', 'List cached gimpy templates.')
+	.action(options => list(null, options.cache))
+program
+	.command('ls')
+	.usage('List all templates hosted on github')
+	.option('-c, --cache', 'List cached gimpy templates.')
+	.action(options => list(null, options.cache))
+
+program
+	.command('cache')
+	.usage('List or clear the cached gimpy templates.')
+	.option('-c, --clear', 'List cached gimpy templates.')
+	.action(options => !options || !options.clear ? list(null, true) : clearCache())
 
 program
 	.command('deploy [env]')
