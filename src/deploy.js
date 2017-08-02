@@ -12,14 +12,14 @@ const path = require('path')
 const colors = require('colors')
 /*eslint-enable */
 
-const updateWebconfigActive = (webconfig, env = 'default') => {
-	if (webconfig && webconfig.env) {
-		webconfig.env.active = env
-		const fileContent = JSON.stringify(webconfig, null, '\t')
+const updateAppConfigActive = (appconfig, env = 'default') => {
+	if (appconfig && appconfig.env) {
+		appconfig.env.active = env
+		const fileContent = JSON.stringify(appconfig, null, '\t')
 		/*eslint-disable */
-		const webconfigPath = path.join(process.cwd(), 'webconfig.json')
+		const appconfigPath = path.join(process.cwd(), 'appconfig.json')
 		/*eslint-enable */
-		fs.writeFileSync(webconfigPath, fileContent)
+		fs.writeFileSync(appconfigPath, fileContent)
 	}
 }
 
@@ -27,21 +27,21 @@ const deploy = (env = 'default') => {
 	const startClock = Date.now()
 
 	/*eslint-disable */
-	const webconfigPath = path.join(process.cwd(), 'webconfig.json')
+	const appconfigPath = path.join(process.cwd(), 'appconfig.json')
 	/*eslint-enable */
 
-	if (!fs.existsSync(webconfigPath)) {
-		console.log(`Missing webconfig.json file. Run ${'webfunc init'.italic.bold} to initialize a new one.`.red)
+	if (!fs.existsSync(appconfigPath)) {
+		console.log(`Missing appconfig.json file. Run ${'webfunc init'.italic.bold} to initialize a new one.`.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
 	}
 	
-	const webconfig =  require(webconfigPath)
-	const environments = webconfig.env
+	const appconfig =  require(appconfigPath)
+	const environments = appconfig.env
 
 	if (!environments) {
-		console.log(`${'webconfig.json'.italic.bold} is missing the ${'env'.italic.bold} property.`.red)
+		console.log(`${'appconfig.json'.italic.bold} is missing the ${'env'.italic.bold} property.`.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
@@ -50,21 +50,21 @@ const deploy = (env = 'default') => {
 	const config = environments[env]
 
 	if (!config) {
-		console.log(`${'webconfig.json'.italic.bold} does not define any ${env.italic.bold} property under its ${'env'.italic.bold} property.`.red)
+		console.log(`${'appconfig.json'.italic.bold} does not define any ${env.italic.bold} property under its ${'env'.italic.bold} property.`.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
 	}
 
 	if (!config.trigger) {
-		console.log(`${'webconfig.json'.italic.bold} does not define any ${'trigger'.italic.bold} property under its ${env.italic.bold} environment.`.red)
+		console.log(`${'appconfig.json'.italic.bold} does not define any ${'trigger'.italic.bold} property under its ${env.italic.bold} environment.`.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
 	}
 
 	if (!config.entryPoint) {
-		console.log(`${'webconfig.json'.italic.bold} does not define any ${'entryPoint'.italic.bold} property under its ${env.italic.bold} environment.`.red)
+		console.log(`${'appconfig.json'.italic.bold} does not define any ${'entryPoint'.italic.bold} property under its ${env.italic.bold} environment.`.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
@@ -90,32 +90,34 @@ ${'npm install -g @google-cloud/functions-emulator'.bold.italic}`.red)
 			shell.exec('functions start')
 		}
 
+		updateAppConfigActive(appconfig, 'default')
+
 		console.log(`${'LOCALLY'.italic.bold} deploying entry-point ${config.entryPoint.italic.bold} using trigger type ${config.trigger.italic.bold}.`.cyan)
 		shell.exec(`functions deploy ${config.entryPoint} ${config.trigger}`)
 	}
 	else {
 		if (!config.functionName) {
-			console.log(`${'webconfig.json'.italic.bold} does not define any ${'functionName'.italic.bold} property under its ${env.italic.bold} environment.`.red)
+			console.log(`${'appconfig.json'.italic.bold} does not define any ${'functionName'.italic.bold} property under its ${env.italic.bold} environment.`.red)
 			/*eslint-disable */
 			process.exit(1)
 			/*eslint-enable */
 		}
 
 		if (!config.googleProject) {
-			console.log(`${'webconfig.json'.italic.bold} does not define any ${'googleProject'.italic.bold} property under its ${env.italic.bold} environment.`.red)
+			console.log(`${'appconfig.json'.italic.bold} does not define any ${'googleProject'.italic.bold} property under its ${env.italic.bold} environment.`.red)
 			/*eslint-disable */
 			process.exit(1)
 			/*eslint-enable */
 		}
 
 		if (!config.bucket) {
-			console.log(`${'webconfig.json'.italic.bold} does not define any ${'bucket'.italic.bold} property under its ${env.italic.bold} environment.`.red)
+			console.log(`${'appconfig.json'.italic.bold} does not define any ${'bucket'.italic.bold} property under its ${env.italic.bold} environment.`.red)
 			/*eslint-disable */
 			process.exit(1)
 			/*eslint-enable */
 		}
 
-		updateWebconfigActive(webconfig, env)
+		updateAppConfigActive(appconfig, env)
 
 		console.log(`Deploying entry-point ${config.entryPoint.italic.bold} to ${`GOOGLE CLOUD FUNCTION ${config.functionName}`.italic.bold} located in project ${config.googleProject.italic.bold} using trigger type ${config.trigger.italic.bold}`.cyan)
 		shell.exec(`gcloud config set project ${config.googleProject}`)
