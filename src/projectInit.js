@@ -14,7 +14,9 @@ const u = require('./utilities')
 const createDir = u.createDir
 const copyFolderContent = u.copyFolderContent
 
-const createApp = answers => {
+const createApp = (answers, verbose) => {
+	if (verbose) 
+		console.log('All answers collected. Ready to create project.'.magenta)
 	/*eslint-disable */
 	const destination = answers._dest ? path.join(process.cwd(), answers._dest) : process.cwd()
 	/*eslint-enable */

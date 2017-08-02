@@ -28,12 +28,12 @@ const askQuestion = (question) => {
 }
 
 const createDir = (dir) => {
-	if (!dirExists(dir)) {
+	if (!fileOrDirExists(dir)) {
 		fs.mkdirSync(dir)
 	}
 }
 
-const dirExists = dir => fs.existsSync(dir)
+const fileOrDirExists = dir => fs.existsSync(dir)
 
 const listDirectories = p => fs.readdirSync(p).filter(f => fs.statSync(p+'/'+f).isDirectory())
 
@@ -50,7 +50,7 @@ module.exports = {
 	askQuestion,
 	copyFolderContent,
 	createDir,
-	dirExists,
+	fileOrDirExists,
 	listDirectories,
 	deleteDir
 }

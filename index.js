@@ -23,7 +23,8 @@ program
 	.version('1.0.0')
 	.command('new <projectType> [dest]')
 	.usage('Creates a new project for my master.')
-	.action((projectType, dest) => loadProjectType({ projectType, dest }).then(answers => createApp(answers)))
+	.option('-v, --verbose', 'Provides detailed data of the creation process.')
+	.action((projectType, dest, options) => loadProjectType({ projectType, dest }, options.verbose).then(answers => createApp(answers, options.verbose)))
 
 program
 	.command('list')
