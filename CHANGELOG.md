@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.4"></a>
+# [0.1.0-alpha.4](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.3...v0.1.0-alpha.4) (2017-08-03)
+
+
+### Features
+
+* new init ops to create new gimpy templates ([99bfe3a](https://github.com/nicolasdao/gimpy/commit/99bfe3a))
+
+
+
 <a name="0.1.0-alpha.3"></a>
 # [0.1.0-alpha.3](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2017-08-02)
 
