@@ -13,7 +13,7 @@ const program = require('commander')
 const colors = require('colors')
 /*eslint-enable */
 const { loadProjectType } = require('./src/questions')
-const { createApp } = require('./src/projectInit')
+const { createApp, initNewTemplate } = require('./src/projectInit')
 const { deploy } = require('./src/deploy')
 const { logs } = require('./src/logs')
 const { list } = require('./src/search')
@@ -42,6 +42,12 @@ program
 	.usage('List or clear the cached gimpy templates.')
 	.option('-c, --clear', 'List cached gimpy templates.')
 	.action(options => !options || !options.clear ? list(null, true) : clearCache())
+
+program
+	.command('init [dest]')
+	.usage('Initialize a new gimpy template.')
+	.option('-v, --verbose', 'Provides detailed data of the creation process.')
+	.action((dest, options) => initNewTemplate(dest, options.verbose))
 
 program
 	.command('deploy [env]')

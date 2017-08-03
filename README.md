@@ -11,8 +11,7 @@ I'm your gimp! I loves doing your painful chores like your project initilization
 
 > Whether you're a Dom or a Sub, I've got you covered you little Devil :smiling_imp:
 
-_**If you're a Dom**_, I'm easy to use and you'll dominate me in no time :smoking:
-. I'll let you mistreat me with all the chores you throw at me. I could for example set up a new GraphQL project fully functional and ready to be deployed to Google Cloud Functions (i.e. the Google serverless solution):
+_**If you're a Dom**_, I'm easy to use and you'll dominate me in no time :smoking:. I'll let you mistreat me with all the chores you throw at me. I could for example set up a new GraphQL project fully functional and ready to be deployed to Google Cloud Functions (i.e. the Google serverless solution):
 
 ```
 gimp new graphql-gcf SlapMeGraphQL

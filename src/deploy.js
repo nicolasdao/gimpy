@@ -31,7 +31,7 @@ const deploy = (env = 'default') => {
 	/*eslint-enable */
 
 	if (!fs.existsSync(appconfigPath)) {
-		console.log(`Missing appconfig.json file. Run ${'webfunc init'.italic.bold} to initialize a new one.`.red)
+		console.log('Missing appconfig.json file.'.red)
 		/*eslint-disable */
 		process.exit(1)
 		/*eslint-enable */
