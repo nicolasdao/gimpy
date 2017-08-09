@@ -40,7 +40,8 @@ const createApp = (answers, verbose) => {
 					}
 				}
 
-				console.log(`New ${answers._projectType} project successfully created.`.green)
+				const onTemplateLoadedMessage = answers._onTemplateLoadedMessage || `New ${answers._projectType} project successfully created.`
+				console.log(onTemplateLoadedMessage.green)
 				/*eslint-disable */
 				process.exit(1)
 				/*eslint-enable */

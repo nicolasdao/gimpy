@@ -96,7 +96,7 @@ const startQuestions = (questionDir, projectType, dest, verbose) => {
 	/*eslint-disable */
 	const templatePath = path.join(__dirname, '../templates', questionDir, 'templates')
 	/*eslint-enable */
-	const { preQuestions, questions } = require(`../templates/${questionDir}/questions`)
+	const { preQuestions, questions, onTemplateLoaded } = require(`../templates/${questionDir}/questions`)
 	if (verbose) {
 		if (preQuestions)
 			console.log('A preQuestions function has been found in that template.'.magenta)	
@@ -108,6 +108,17 @@ const startQuestions = (questionDir, projectType, dest, verbose) => {
 		.then(() => !questions 
 			? Promise.resolve(answers)
 			: questions.reduce((a, q) => a.then(answers => runQuestion(q, answers, verbose)), Promise.resolve(answers)))
+		.then(answers => {
+			if (onTemplateLoaded) {
+				const t = typeof(onTemplateLoaded)
+				const onTemplateLoadedMessage = 
+					t == 'function' ? onTemplateLoaded(answers) :
+						t == 'string' ? onTemplateLoaded : null
+				return Object.assign(answers, { _onTemplateLoadedMessage: onTemplateLoadedMessage })
+			}
+			else
+				return Object.assign(answers, { _onTemplateLoadedMessage: null })
+		})
 }
 
 const runQuestion = ({ skip, question, answerName, defaultValue, execute = {}, files }, answers, verbose) => {
@@ -133,8 +144,8 @@ const runQuestion = ({ skip, question, answerName, defaultValue, execute = {}, f
 			? execute.validate(a) 
 				? execute.onSuccess ? execute.onSuccess(a) : a
 				: execute.onError 
-					? throwErrorAndReRunQuestion({ question, answerName, defaultValue, execute, files }, answers, execute.onError(a))
-					: throwErrorAndReRunQuestion({ question, answerName, defaultValue, execute, files }, answers, 'Ouch!!! Your answer is not valid Master!')
+					? throwErrorAndReRunQuestion({ skip, question, answerName, defaultValue, execute, files }, answers, execute.onError(a))
+					: throwErrorAndReRunQuestion({ skip, question, answerName, defaultValue, execute, files }, answers, 'Ooch!!! Your answer is not valid Master!')
 			: execute.onSuccess ? execute.onSuccess(a) : a)
 		.then(a => {
 			let b = {}
