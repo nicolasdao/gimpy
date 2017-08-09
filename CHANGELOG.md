@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.7"></a>
+# [0.1.0-alpha.7](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.6...v0.1.0-alpha.7) (2017-08-09)
+
+
+### Features
+
+* Add support for skipping questions ([9f9fc28](https://github.com/nicolasdao/gimpy/commit/9f9fc28))
+
+
+
 <a name="0.1.0-alpha.6"></a>
 # [0.1.0-alpha.6](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.5...v0.1.0-alpha.6) (2017-08-09)
 
