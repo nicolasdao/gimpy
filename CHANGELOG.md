@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.9"></a>
+# [0.1.0-alpha.9](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.8...v0.1.0-alpha.9) (2017-08-09)
+
+
+### Bug Fixes
+
+* Issue related to quesion retries ([9457f69](https://github.com/nicolasdao/gimpy/commit/9457f69))
+
+
+
 <a name="0.1.0-alpha.8"></a>
 # [0.1.0-alpha.8](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.7...v0.1.0-alpha.8) (2017-08-09)
 
