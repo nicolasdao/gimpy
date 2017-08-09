@@ -50,9 +50,9 @@ program
 	.action((dest, options) => initNewTemplate(dest, options.verbose))
 
 program
-	.command('deploy [env]')
-	.usage('Deploys a Google Cloud Functions projects locally or to a Google Cloud Account.')
-	.action(env => deploy(env))
+	.command('deploy [env] [option1] [option2] [option3] [option4] [option5]')
+	.usage('Deploys your projects. Accepts up to 6 optional arguments: env, option1, option2, option3, option4, option5). Those arguments meaning depends on the gimpy template.')
+	.action((env, option1, option2, option3, option4, option5) => deploy(env, option1, option2, option3, option4, option5))
 
 program
 	.command('logs [limit]')
