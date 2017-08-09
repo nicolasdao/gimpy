@@ -110,11 +110,24 @@ const startQuestions = (questionDir, projectType, dest, verbose) => {
 			: questions.reduce((a, q) => a.then(answers => runQuestion(q, answers, verbose)), Promise.resolve(answers)))
 }
 
-const runQuestion = ({ question, answerName, defaultValue, execute = {}, files }, answers, verbose) => {
+const runQuestion = ({ skip, question, answerName, defaultValue, execute = {}, files }, answers, verbose) => {
+	if (skip && typeof(skip) != 'function')
+		throw new Error('The \'skip\' property of one of the template\'s question is not a function. Sorry Master!')
+	if (question && typeof(question) != 'function')
+		throw new Error('The \'question\' property of one of the template\'s question is not a function. Sorry Master!')
+	if (defaultValue && typeof(defaultValue) != 'function')
+		throw new Error('The \'defaultValue\' property of one of the template\'s question is not a function. Sorry Master!')
+	if (execute.validate && typeof(execute.validate) != 'function')
+		throw new Error('The \'execute.validate\' property of one of the template\'s question is not a function. Sorry Master!')
+	if (execute.onError && typeof(execute.onError) != 'function')
+		throw new Error('The \'execute.onError\' property of one of the template\'s question is not a function. Sorry Master!')
+	if (execute.onSuccess && typeof(execute.onSuccess) != 'function')
+		throw new Error('The \'execute.onSuccess\' property of one of the template\'s question is not a function. Sorry Master!')
+
 	const quest = question(answers)
 	if (verbose)
 		console.log(`Asking question: '${quest}'`.magenta)
-	return askQuestion(quest)
+	return (skip && skip(answers) ? Promise.resolve(null) : askQuestion(quest))
 		.then(a => a || (defaultValue ? defaultValue(answers) : ''))
 		.then(a => execute.validate
 			? execute.validate(a) 
