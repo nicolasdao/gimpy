@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.8"></a>
+# [0.1.0-alpha.8](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.7...v0.1.0-alpha.8) (2017-08-09)
+
+
+### Features
+
+* Add support for custom message after the template has been successfully loaded ([119c036](https://github.com/nicolasdao/gimpy/commit/119c036))
+
+
+
 <a name="0.1.0-alpha.7"></a>
 # [0.1.0-alpha.7](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.6...v0.1.0-alpha.7) (2017-08-09)
 
