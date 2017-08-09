@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.6"></a>
+# [0.1.0-alpha.6](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.5...v0.1.0-alpha.6) (2017-08-09)
+
+
+### Bug Fixes
+
+* missing passing data at deployment step ([046e8bd](https://github.com/nicolasdao/gimpy/commit/046e8bd))
+
+
+### Features
+
+* Move deployment responsibility to the template ([b291bc0](https://github.com/nicolasdao/gimpy/commit/b291bc0))
+
+
+
 <a name="0.1.0-alpha.5"></a>
 # [0.1.0-alpha.5](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.4...v0.1.0-alpha.5) (2017-08-03)
 
