@@ -144,14 +144,18 @@ const runQuestion = ({ skip, question, answerName, defaultValue, execute = {}, f
 			? execute.validate(a) 
 				? execute.onSuccess ? execute.onSuccess(a) : a
 				: execute.onError 
-					? throwErrorAndReRunQuestion({ skip, question, answerName, defaultValue, execute, files }, answers, execute.onError(a))
-					: throwErrorAndReRunQuestion({ skip, question, answerName, defaultValue, execute, files }, answers, 'Ooch!!! Your answer is not valid Master!')
+					? { _errorMessage: execute.onError(a) }
+					: { _errorMessage: 'Ooch!!! Your answer is not valid Master!' }
 			: execute.onSuccess ? execute.onSuccess(a) : a)
 		.then(a => {
-			let b = {}
-			b[answerName] = a
-			b[`_${answerName}`] = { type: 'answer', token: answerName, value: a, files: files }
-			return Object.assign(answers, b)
+			if (a._errorMessage) 
+				return throwErrorAndReRunQuestion({ skip, question, answerName, defaultValue, execute, files }, answers, a._errorMessage)
+			else {
+				let b = {}
+				b[answerName] = a
+				b[`_${answerName}`] = { type: 'answer', token: answerName, value: a, files: files }
+				return Object.assign(answers, b)
+			}
 		})
 }
 
