@@ -24,7 +24,7 @@ const deploy = (env, option1, option2, option3, option4, option5) => {
 	}
 
 	const deployProject = require(deployPath).deploy
-	deployProject()
+	deployProject(env, option1, option2, option3, option4, option5)
 }
 
 module.exports = {
