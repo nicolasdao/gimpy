@@ -27,7 +27,7 @@ const createApp = (answers, verbose) => {
 			else {
 				for (let key in answers) {
 					const answer = answers[key]
-					if (answer.type == 'answer' && (answer.files || []).length > 0) {
+					if (answer && answer.type == 'answer' && (answer.files || []).length > 0) {
 						const token = `{{${answer.token}}}`
 						const tokenValue = answer.value 
 						replace({
