@@ -43,8 +43,8 @@ const searchLocally = (template, verbose) => {
 	if (verbose)
 		console.log('Start searching locally'.magenta)
 
-	const templateIsAbsolutePath = template && template.trim().match(/^\//) || template.trim().match(/^~/)
-	const templateIsRelativePath = template && template.trim().match(/^\.\//) || template.trim().match(/^\.\.\//)
+	const templateIsAbsolutePath = template && (template.trim().match(/^\//) || template.trim().match(/^~/))
+	const templateIsRelativePath = template && (template.trim().match(/^\.\//) || template.trim().match(/^\.\.\//))
 	if (templateIsAbsolutePath || templateIsRelativePath) {
 		if (verbose)
 			console.log(`Template '${template}' is a local path. Start searching for a template under that path.`.magenta)
