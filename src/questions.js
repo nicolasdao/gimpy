@@ -13,55 +13,56 @@ const colors = require('colors')
 const  { askQuestion, deleteDir, fileOrDirExists } = require('./utilities')
 const  { search, searchLocally } = require('./search')
 
-const loadProjectType = ({ projectType, dest }, verbose) => (projectType ? searchLocally(projectType, verbose) : Promise.resolve([]))
-	.then(localResults => (localResults || []).length == 1
+const loadProjectType = ({ projectType, dest }, verbose) => 
+	(projectType ? searchLocally(projectType, verbose) : Promise.resolve([]))
+		.then(localResults => (localResults || []).length == 1
 		// Template has been found locally. Ready to start using it straight away.
-		? startQuestions(localResults[0], projectType, dest, verbose)
-		// Template not found locally. Search for it on github and load it locally.
-		: search(projectType, verbose)
-			.then(projectTemplates => {
-				const l = projectTemplates.length
-				if (l == 0) {
-					console.log(`Cannot find any gimpy template that matches '${projectType}'. Run ${'\'gimp list\''.italic.bold} to list all available templates.`.red)
-					/*eslint-disable */
+			? startQuestions(localResults[0], projectType, dest, verbose)
+			// Template not found locally. Search for it on github and load it locally.
+			: search(projectType, verbose)
+				.then(projectTemplates => {
+					const l = projectTemplates.length
+					if (l == 0) {
+						console.log(`Cannot find any gimpy template that matches '${projectType}'. Run ${'\'gimp list\''.italic.bold} to list all available templates.`.red)
+						/*eslint-disable */
 					process.exit(1)
 					/*eslint-enable */
-				}
-				if (l > 1) 
-					return loadOneOfTheProjectTypes(projectTemplates, dest)
-				else
-					return projectTemplates[0]
-			})
-			.then(projectTemplate => {
-				if (verbose)
-					console.log(`Template ${projectTemplate.name} has been found on GitHub. Preparing to clone that repo.`.magenta)
-				/*eslint-disable */
+					}
+					if (l > 1) 
+						return loadOneOfTheProjectTypes(projectTemplates, dest)
+					else
+						return projectTemplates[0]
+				})
+				.then(projectTemplate => {
+					if (verbose)
+						console.log(`Template ${projectTemplate.name} has been found on GitHub. Preparing to clone that repo.`.magenta)
+					/*eslint-disable */
 				const templateLocation = path.join(__dirname, `../templates`, projectTemplate.name)
 				/*eslint-enable */
-				if (verbose)
-					console.log(`Deleting previous directory ${templateLocation}.`.magenta)
-				return deleteDir(templateLocation)
-					.then(() => {
-						if (verbose) {
-							console.log(`Directory ${templateLocation} successfully deleted.`.magenta)
-							console.log(`Ready to clone repo ${projectTemplate.clone_url}.`.magenta)
-						}
-					})
-					.then(() => shell.exec(`git clone ${projectTemplate.clone_url} ${templateLocation}`))
-					.then(
-						() => {
-							if (verbose)
-								console.log('Git clone successful.'.magenta)
-							return validateGimpyTemplate(projectTemplate.name, projectTemplate.author.name, projectTemplate.author.github, templateLocation, verbose)
-						},
-						() => {
-							console.log('Ooooooochh Masteeeer!!! Your git clone failed.'.red)
-							/*eslint-disable */
+					if (verbose)
+						console.log(`Deleting previous directory ${templateLocation}.`.magenta)
+					return deleteDir(templateLocation)
+						.then(() => {
+							if (verbose) {
+								console.log(`Directory ${templateLocation} successfully deleted.`.magenta)
+								console.log(`Ready to clone repo ${projectTemplate.clone_url}.`.magenta)
+							}
+						})
+						.then(() => shell.exec(`git clone ${projectTemplate.clone_url} ${templateLocation}`))
+						.then(
+							() => {
+								if (verbose)
+									console.log('Git clone successful.'.magenta)
+								return validateGimpyTemplate(projectTemplate.name, projectTemplate.author.name, projectTemplate.author.github, templateLocation, verbose)
+							},
+							() => {
+								console.log('Ooooooochh Masteeeer!!! Your git clone failed.'.red)
+								/*eslint-disable */
 							process.exit(1)
 							/*eslint-enable */
-						})
-					.then(() => startQuestions(projectTemplate.name, projectTemplate.name, dest, verbose))
-			}))
+							})
+						.then(() => startQuestions(projectTemplate.name, projectTemplate.name, dest, verbose))
+				}))
 
 const loadOneOfTheProjectTypes = (projectTemplates, dest, noIntro = false) => askQuestion((
 	(!noIntro ? 'I\'ve found multiple projects that match your search Master: \n' : '') +
@@ -93,10 +94,20 @@ const validateGimpyTemplate = (templateName, authorName, authorGitHub, location,
 const startQuestions = (questionDir, projectType, dest, verbose) => {
 	if (verbose)
 		console.log('The template has been successfully installed locally. Starting asking questions'.magenta)
-	/*eslint-disable */
-	const templatePath = path.join(__dirname, '../templates', questionDir, 'templates')
-	/*eslint-enable */
-	const { preQuestions, questions, onTemplateLoaded } = require(`../templates/${questionDir}/questions`)
+
+	const questionDirIsLocal = questionDir.trim().match(/^\//) || questionDir.trim().match(/^~/) || questionDir.trim().match(/^\.\//) || questionDir.trim().match(/^\.\.\//)
+
+	const templatePath = questionDirIsLocal 
+		? path.join(questionDir, 'templates')
+		/*eslint-disable */
+		: path.join(__dirname, '../templates', questionDir, 'templates')
+		/*eslint-enable */
+
+	const questionsPath = questionDirIsLocal
+		? path.join(questionDir, 'questions.js')
+		: `../templates/${questionDir}/questions`
+
+	const { preQuestions, questions, onTemplateLoaded } = require(questionsPath)
 	if (verbose) {
 		if (preQuestions)
 			console.log('A preQuestions function has been found in that template.'.magenta)	
