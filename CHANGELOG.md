@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0-alpha.10"></a>
+# [0.1.0-alpha.10](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.9...v0.1.0-alpha.10) (2017-08-12)
+
+
+### Bug Fixes
+
+* unhandled case where the gimpy template creates 0 questions ([b6d1794](https://github.com/nicolasdao/gimpy/commit/b6d1794))
+
+
+### Features
+
+* Add support for creating project from local gimpy templates ([6a8b5f5](https://github.com/nicolasdao/gimpy/commit/6a8b5f5))
+
+
+
 <a name="0.1.0-alpha.9"></a>
 # [0.1.0-alpha.9](https://github.com/nicolasdao/gimpy/compare/v0.1.0-alpha.8...v0.1.0-alpha.9) (2017-08-09)
 
