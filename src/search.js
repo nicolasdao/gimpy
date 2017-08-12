@@ -42,18 +42,15 @@ const search = (template, verbose) => {
 const searchLocally = (template, verbose) => {
 	if (verbose)
 		console.log('Start searching locally'.magenta)
-	if (!template) {
-		console.log('Template name is required (e.g. gimp new webapp-servless your-app)'.red)
-		/*eslint-disable */
-		process.exit(1)
-		/*eslint-enable */
-	}
-	const templateIsAbsolutePath = template.trim().match(/^\//) || template.trim().match(/^~/)
-	const templateIsRelativePath = template.trim().match(/^\.\//) || template.trim().match(/^\.\.\//)
+
+	const templateIsAbsolutePath = template && template.trim().match(/^\//) || template.trim().match(/^~/)
+	const templateIsRelativePath = template && template.trim().match(/^\.\//) || template.trim().match(/^\.\.\//)
 	if (templateIsAbsolutePath || templateIsRelativePath) {
 		if (verbose)
 			console.log(`Template '${template}' is a local path. Start searching for a template under that path.`.magenta)
+		/*eslint-disable */
 		const fullPath = templateIsRelativePath ? path.join(process.cwd(), template) : template
+		/*eslint-enable */
 		if (!fs.existsSync(fullPath)) {
 			console.log(`Path ${fullPath} does not exist!`.red)
 			/*eslint-disable */
