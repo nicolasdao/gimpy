@@ -14,7 +14,7 @@ I'm your gimp! I loves doing your painful chores like your project initilization
 _**If you're a Dom**_, I'm easy to use and you'll dominate me in no time :smoking:. I'll let you mistreat me with all the chores you throw at me. I could for example set up a new fully functional GraphQL project that is ready to be deployed to Google Cloud Functions (i.e. the Google serverless solution):
 
 ```
-gimp new graphql-gcf slapMeGraphQL
+gimp new graphql-serverless slapMeGraphQL
 cd slapMeGraphQL
 npm install
 gimp deploy
@@ -71,13 +71,13 @@ You'll find a README.md file at the root of the _chore4Pleasure_ project. It exp
 #### Deployments
 As you've noticed in the intro, the _graphql-gcf_ template can be automatically deployed both locally or to any Google Cloud Account. Gimp currently only supports deployment to Google Cloud Functions. More is coming, as well as the ability to let you create your own custom deployment. For those interested, there are currently only 2 templates that are fully configured to be deployed to GCF using gimpy:
 
-1. _**graphql-gcf**_ - GraphQL project (incl. GraphiQL).
-2. _**basicwebapp-gcf**_ - Basic HTTP server that supports CORS.
+1. _**graphql-serverless**_ - GraphQL project (incl. GraphiQL) that can be deployed on both Google Cloud Functions & Firebase Functions (AWS Lambda coming soon...).
+2. _**webapp-serverless**_ - Basic HTTP server that supports CORS and routing. It can be deployed on both Google Cloud Functions & Firebase Functions (AWS Lambda coming soon...).
 
 Example:
 
 ```
-gimp new graphql-gcf slapMeGraphQL
+gimp new graphql-serverless slapMeGraphQL
 cd slapMeGraphQL
 npm install
 gimp deploy
@@ -87,7 +87,7 @@ The last command will deploy your GraphQL project locally (providing both [gclou
 
 To deploy it to your Google Could Account (the details of your account will be asked during the template installation):
 ```
-gimp deploy staging
+gimp deploy build
 ```
 
 All the environment configurations are stored in a _**appconfig.json**_ file. Update it to add or update environments. 
